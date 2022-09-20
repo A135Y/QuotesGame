@@ -80,13 +80,28 @@ public static String TAG = "MainActivity";
                onAnswerSelected(3);
            }
        });
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                onAnswerSubmission();
+            public void onClick(View v) {
+                if (getCurrentQuotes().playerAnswer != -1) {
+                    onAnswerSubmission();
+                }
+                else {
+                    AlertDialog.Builder invalidAnswerDialog = new AlertDialog.Builder(MainActivity.this);
+                    invalidAnswerDialog.setCancelable(true);
+                    invalidAnswerDialog.setTitle("No Selection Made");
+                    invalidAnswerDialog.setMessage("Please Choose an answer");
+                    invalidAnswerDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    invalidAnswerDialog.create().show();
+                }
+
             }
         });
-
         startNewGame();
     }
 
@@ -228,6 +243,26 @@ public static String TAG = "MainActivity";
                 "Starsky & Hutch",
                 2
         );
+        Quotes quote14 = new Quotes(
+                R.drawable.pexels_photo_6273478,
+                "Her heart will go on, but whose heart is it?",
+                "Whitney Houston",
+                "Diana Ross",
+                "Celine Dion",
+                "Mariah Carey",
+                1
+        );
+        Quotes quote15 = new Quotes(
+                R.drawable.pexels_photo_6273480,
+                "You got a dream... You gotta protect it. People can't do somethin' themselves, they wanna tell you you can't do it. " +
+                        "If you want somethin, go get it. Period. " +
+                        "\nHere’s the truth, Will Smith did say this, but in which movie?",
+                "Independence Day",
+                "Bad Boys",
+                "Men In Black",
+                "The Pursuit of Happiness",
+                3
+        );
 
         quotes = new ArrayList<>();
         quotes.add(quote1);
@@ -243,9 +278,11 @@ public static String TAG = "MainActivity";
         quotes.add(quote11);
         quotes.add(quote12);
         quotes.add(quote13);
+        quotes.add(quote14);
+        quotes.add(quote15);
 
         totalCorrect = 0;
-        totalQuotes = 0;
+        totalQuotes = quotes.size();
 
         Quotes firstQuote = chooseNewQuotes();
 
@@ -298,7 +335,7 @@ public static String TAG = "MainActivity";
          displayQuotesRemaining(quotes.size());
 
         if (quotes.size() == 0) {
-            String gameOverMessage = getGameOverMessage(totalCorrect, 13);
+            String gameOverMessage = getGameOverMessage(totalCorrect, totalQuotes);
 
             AlertDialog.Builder gameOverDialogBuilder = new AlertDialog.Builder(MainActivity.this);
             gameOverDialogBuilder.setCancelable(false);
