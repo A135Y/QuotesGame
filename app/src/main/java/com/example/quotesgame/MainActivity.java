@@ -39,7 +39,7 @@ public static String TAG = "MainActivity";
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_unquote_icon);
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setElevation(0);
 
@@ -119,7 +119,6 @@ public static String TAG = "MainActivity";
         quotesRemainingTextView.setText(quotesRemaining +"");
        }
 
-    // TODO 4-A: onAnswerSelected(int answerSelected) {...}
 
     void startNewGame(){
         Quotes quote1 = new Quotes(
@@ -263,6 +262,14 @@ public static String TAG = "MainActivity";
                 "The Pursuit of Happiness",
                 3
         );
+        Quotes quote16 = new Quotes(
+                R.drawable.pexels_photo_10827983,
+                "Which Would Be Worse: To Live As A Monster, Or To Die As A Good Man?",
+                "Shutter Island",
+                "Scarface",
+                "Forest Gump",
+                "Get Out",
+                0);
 
         quotes = new ArrayList<>();
         quotes.add(quote1);
@@ -280,6 +287,7 @@ public static String TAG = "MainActivity";
         quotes.add(quote13);
         quotes.add(quote14);
         quotes.add(quote15);
+        quotes.add(quote16);
 
         totalCorrect = 0;
         totalQuotes = quotes.size();
@@ -354,7 +362,7 @@ public static String TAG = "MainActivity";
              displayQuotes(getCurrentQuotes());
         }
     }
-    int generateRandomNumber( int max){
+    int generateRandomNumber(int max){
         double randNum = Math.random() * max;
         return (int) randNum;
     }

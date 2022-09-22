@@ -29,10 +29,6 @@ public class Quotes {
 
 
     boolean isCorrect(){
-        if(playerAnswer == correctAnswer){
-            return true;
-        }else{
-        return false;
-        }
+        return playerAnswer == correctAnswer;
     }
 }
